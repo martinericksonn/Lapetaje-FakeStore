@@ -12,9 +12,10 @@ class ApiService {
             body: json.encode({"username": name, "password": password}))
         .then((data) {
       ;
-      print(data.body);
+      final jsonData = json.decode(data.body);
+      print(jsonData);
 
-      return data.body;
+      return jsonData;
     }).catchError((error) => print(error));
   }
 }
