@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // import '../models/product.dart';
 import '../model/products.dart';
 import '../services/api_service.dart';
+import 'all_category.dart';
 import 'cart_screen.dart';
 // import 'all_category.dart';
 // import 'cart_screen.dart';
@@ -25,14 +26,13 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.redAccent,
         actions: [
-          // IconButton(
-          //   icon: const Icon(Icons.view_list),
-          //   onPressed: () =>
-          //    Navigator.push(
-          //     context,
-          //     MaterialPageRoute(builder: (_) => const AllCategoryScreen()),
-          //   ),
-          // ),
+          IconButton(
+            icon: const Icon(Icons.view_list),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const AllCategoryScreen()),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () => Navigator.push(

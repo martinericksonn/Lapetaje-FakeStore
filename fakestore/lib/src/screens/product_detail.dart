@@ -7,7 +7,7 @@ import 'package:get_it/get_it.dart';
 class ProductDetailScreen extends StatelessWidget {
   String userId;
   int productId;
-
+  late Product? product;
   ApiService get apiService => GetIt.I<ApiService>();
   ProductDetailScreen({Key? key, required this.productId, required this.userId})
       : super(key: key);
@@ -27,7 +27,7 @@ class ProductDetailScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
 
-            final product = snapshot.data;
+            product = snapshot.data;
 
             if (product == null) {
               return const Center(
@@ -46,13 +46,13 @@ class ProductDetailScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 30),
                   Image.network(
-                    product.image!,
+                    product!.image!,
                     height: 200,
                     width: double.infinity,
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    '\$${product.price}',
+                    '\$${product!.price}',
                     style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -60,14 +60,14 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    product.title,
+                    product!.title,
                     style: const TextStyle(
                       fontSize: 25,
                     ),
                   ),
                   Chip(
                     label: Text(
-                      product.category!,
+                      product!.category!,
                       style: const TextStyle(
                         fontSize: 15,
                         color: Colors.white,
@@ -76,7 +76,7 @@ class ProductDetailScreen extends StatelessWidget {
                     backgroundColor: Colors.blueGrey,
                   ),
                   const SizedBox(height: 30),
-                  Text(product.description!),
+                  Text(product!.description!),
                 ],
               ),
             );
@@ -86,7 +86,7 @@ class ProductDetailScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () async {
-          await apiService.updateCart(1, "token", 1);
+          await apiService.updateCart(product!.id, userId, 1);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Product added to cart'),
