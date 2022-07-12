@@ -8,14 +8,12 @@ class MyApp extends StatelessWidget {
 
   void setupLocator() {
     if (!GetIt.I.isRegistered<ApiService>()) {
-      print("Trying to register navigator");
       GetIt.I.registerLazySingleton(
         () => ApiService(),
       );
     }
   }
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     setupLocator();

@@ -4,6 +4,7 @@ import '../model/products.dart';
 import '../services/api_service.dart';
 import 'package:get_it/get_it.dart';
 
+// ignore: must_be_immutable
 class ProductDetailScreen extends StatelessWidget {
   String userId;
   int productId;
@@ -87,6 +88,7 @@ class ProductDetailScreen extends StatelessWidget {
         backgroundColor: Colors.green,
         onPressed: () async {
           await apiService.updateCart(product!.id, userId, 1);
+          // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Product added to cart'),
