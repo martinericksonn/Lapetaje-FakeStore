@@ -84,7 +84,7 @@ class ApiService {
     return http
         .put(Uri.parse('$baseUrl/carts/$cartId'),
             body: jsonEncode(<String, dynamic>{
-              "userId": userId,
+              "userId": '1',
               "date": DateTime.now().toString(),
               "products": [
                 {"productId": productId, "quantity": 1}
@@ -92,8 +92,8 @@ class ApiService {
             }))
         .then((data) {
       if (data.statusCode == 200) {
-        final jsonData = json.decode(data.body);
-        print(jsonData);
+        print(data.body);
+        print("cart updated");
       }
     }).catchError((error) => print(error));
   }
