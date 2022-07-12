@@ -8,7 +8,7 @@ part of 'cart_update.dart';
 
 CartUpdate _$CartUpdateFromJson(Map<String, dynamic> json) => CartUpdate(
       id: json['id'] as int?,
-      userId: json['userId'] as int,
+      userId: json['userId'] as String,
       date: DateTime.parse(json['date'] as String),
       products: (json['products'] as List<dynamic>)
           .map((e) => e as Map<String, dynamic>)

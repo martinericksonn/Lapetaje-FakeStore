@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 
 import '../services/api_service.dart';
 import 'home.dart';
@@ -13,8 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final ApiService apiService = ApiService();
-
+  ApiService get apiService => GetIt.I<ApiService>();
   final TextEditingController nameCtrl = TextEditingController(
     text: 'mor_2314',
   );
@@ -87,7 +86,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (_) => HomeScreen(
-                                apiService: apiService,
                                 userToken: "123",
                               ),
                             ),

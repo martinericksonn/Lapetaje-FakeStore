@@ -7,14 +7,14 @@ import 'cart_screen.dart';
 // import 'all_category.dart';
 // import 'cart_screen.dart';
 // import 'product_detail.dart';
+import 'package:get_it/get_it.dart';
 
 class HomeScreen extends StatelessWidget {
-  final ApiService apiService;
   final String userToken;
 
-  const HomeScreen(
-      {Key? key, required this.apiService, required this.userToken})
-      : super(key: key);
+  ApiService get apiService => GetIt.I<ApiService>();
+
+  const HomeScreen({Key? key, required this.userToken}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

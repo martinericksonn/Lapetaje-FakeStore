@@ -5,7 +5,7 @@ part 'cart_update.g.dart';
 @JsonSerializable()
 class CartUpdate {
   int? id;
-  int userId;
+  String userId;
   DateTime date;
   List<Map<String, dynamic>> products;
 
@@ -17,4 +17,6 @@ class CartUpdate {
   });
   factory CartUpdate.fromJson(Map<String, dynamic> data) =>
       _$CartUpdateFromJson(data);
+
+  Map<String, dynamic> toJson() => _$CartUpdateToJson(this);
 }

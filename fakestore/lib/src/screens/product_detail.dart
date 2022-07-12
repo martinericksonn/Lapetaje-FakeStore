@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../model/products.dart';
 import '../services/api_service.dart';
+import 'package:get_it/get_it.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   String userId;
   int productId;
-  ApiService apiService;
 
-  ProductDetailScreen(
-      {Key? key,
-      required this.productId,
-      required this.apiService,
-      required this.userId})
+  ApiService get apiService => GetIt.I<ApiService>();
+  ProductDetailScreen({Key? key, required this.productId, required this.userId})
       : super(key: key);
 
   @override
@@ -89,7 +86,7 @@ class ProductDetailScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () async {
-          await apiService.updateCart(1, "token");
+          await apiService.updateCart(1, "token", 1);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Product added to cart'),

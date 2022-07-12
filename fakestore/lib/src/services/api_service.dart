@@ -4,6 +4,7 @@ import 'package:fakestore/src/model/products.dart';
 import 'package:http/http.dart' as http;
 
 import '../model/cart.dart';
+import '../model/cart_update.dart';
 
 class ApiService {
   static const String baseUrl = 'https://fakestoreapi.com';
@@ -49,60 +50,68 @@ class ApiService {
     });
   }
 
-  Future<Product> updateCart(int productId, String userId) {
+  Future<List<Product>> getProductsByCategory(String categoryName) {
     return http
-        .put(Uri.parse("$baseUrl/carts"),
-            headers: headers,
-            body: json.encode({
-              "userId": userId,
-              "date": DateTime.now(),
-              "products": [
-                {"productId": productId, "quantity": 1}
-              ]
-            }))
+        .get(Uri.parse('$baseUrl/products/category/$categoryName'))
         .then((data) {
-      final jsonData = json.decode(data.body);
+      final products = <Product>[];
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
 
-      return Product.fromJson(jsonData);
+        for (var product in jsonData) {
+          products.add(Product.fromJson(product));
+        }
+      }
+      return products;
     }).catchError((error) => print(error));
   }
 
-  // Future<Product> deleteCart(String productId) {
-  //   return http
-  //       .put(Uri.parse("$baseUrl/carts"),
-  //           headers: headers,
-  //           body: json.encode({
-  //             "userId": userId,
-  //             "date": DateTime.now(),
-  //             "products": [
-  //               {"productId": productId, "quantity": 1}
-  //             ]
-  //           }))
-  //       .then((data) {
-  //     final jsonData = json.decode(data.body);
+  Future<List<String>> getAllCategories() {
+    return http.get(Uri.parse('$baseUrl/products/categories')).then((data) {
+      final categories = <String>[];
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
 
-  //     return Product.fromJson(jsonData);
-  //   }).catchError((error) => print(error));
-  // }
+        for (var category in jsonData) {
+          categories.add(category);
+        }
+      }
+      return categories;
+    }).catchError((error) => print(error));
+  }
 
-  // Future<Cart> getCart(
-  //   String cartId,
-  // ) {
-  //   return Cart();
-  //   // return http
-  //   //     .put(Uri.parse("$baseUrl/carts"),
-  //   //         headers: headers,
-  //   //         body: json.encode({
-  //   //           "userId": cartId,
-  //   //           "date": DateTime.now(),
-  //   //           "products": [
-  //   //             {"productId": cartId, "quantity": 1}
-  //   //           ]
-  //   //         }))
-  //   //     .then((data) {
-  //   //   final jsonData = json.decode(data.body);
+  Future<void> updateCart(int cartId, String userId, int productId) {
+    final cartUpdate =
+        CartUpdate(userId: userId, date: DateTime.now(), products: [
+      {'productId': productId, 'quantity': 1}
+    ]);
+    return http
+        .put(Uri.parse('$baseUrl/carts/$cartId'),
+            body: json.encode(cartUpdate.toJson()))
+        .then((data) {
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
+        print(jsonData);
+      }
+    }).catchError((error) => print(error));
+  }
 
-  //   //   return Product.fromJson(jsonData);
-  //   // }).catchError((error) => print(error));
-  // }
+  Future<void> deleteCart(String cartId) {
+    return http.delete(Uri.parse('$baseUrl/carts/$cartId')).then((data) {
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
+        print(jsonData);
+      }
+    }).catchError((error) => print(error));
+  }
+
+  Future<Cart?> getCart(String id) {
+    return http.get(Uri.parse('$baseUrl/carts/$id')).then((data) {
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
+        return Cart.fromJson(jsonData);
+      }
+      return null;
+    }).catchError((error) => print(error));
+  }
 }
