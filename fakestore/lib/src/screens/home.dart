@@ -1,15 +1,22 @@
+import 'package:fakestore/src/screens/product_detail.dart';
 import 'package:flutter/material.dart';
 
 // import '../models/product.dart';
 import '../model/products.dart';
 import '../services/api_service.dart';
+import 'all_category.dart';
+import 'cart_screen.dart';
 // import 'all_category.dart';
 // import 'cart_screen.dart';
 // import 'product_detail.dart';
+import 'package:get_it/get_it.dart';
 
 class HomeScreen extends StatelessWidget {
-  final ApiService apiService;
-  const HomeScreen({Key? key, required this.apiService}) : super(key: key);
+  final String userToken;
+
+  ApiService get apiService => GetIt.I<ApiService>();
+
+  const HomeScreen({Key? key, required this.userToken}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,23 +26,25 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.redAccent,
         actions: [
-          // IconButton(
-          //   icon: const Icon(Icons.view_list),
-          //   onPressed: () =>
-          //    Navigator.push(
-          //     context,
-          //     MaterialPageRoute(builder: (_) => const AllCategoryScreen()),
-          //   ),
-          // ),
-          // IconButton(
-          //   icon: const Icon(Icons.shopping_cart),
-          //   onPressed: () => Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (_) => const CartScreen(),
-          //     ),
-          //   ),
-          // ),
+          IconButton(
+            icon: const Icon(Icons.view_list),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => AllCategoryScreen(
+                        userToken: userToken,
+                      )),
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const CartScreen(),
+              ),
+            ),
+          ),
         ],
       ),
       body: Center(
@@ -61,12 +70,15 @@ class HomeScreen extends StatelessWidget {
                     ),
                     subtitle: Text(product.price.toString()),
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (_) => ProductDetailScreen(),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ProductDetailScreen(
+                            productId: product.id,
+                            userId: userToken,
+                          ),
+                        ),
+                      );
                     },
                   );
                 }),

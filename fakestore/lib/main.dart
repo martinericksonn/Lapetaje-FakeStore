@@ -1,24 +1,17 @@
+import 'package:fakestore/src/app.dart';
+import 'package:fakestore/src/services/api_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import 'src/screens/login_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void setupLocator() {
+  GetIt.I.registerLazySingleton(() => ApiService());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Fake Store',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginScreen(),
-    );
-  }
+// This widget is the root of your application.
+@override
+void main() {
+  setupLocator();
+  runApp(const MyApp());
 }

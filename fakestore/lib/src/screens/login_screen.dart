@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 
 import '../services/api_service.dart';
 import 'home.dart';
@@ -13,8 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final ApiService apiService = ApiService();
-
+  ApiService get apiService => GetIt.I<ApiService>();
   final TextEditingController nameCtrl = TextEditingController(
     text: 'mor_2314',
   );
@@ -73,33 +72,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           loading = false;
                         });
-                        // if (getToken != null && getToken['token'] != null) {
-                        //   ScaffoldMessenger.of(context).showSnackBar(
-                        //     const SnackBar(
-                        //       content: Text('Successfully logged in'),
-                        //       backgroundColor:
-                        //           Color.fromARGB(255, 215, 224, 215),
-                        //     ),
-                        //   );
-                        Future.delayed(
-                          const Duration(seconds: 0),
-                          () => Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => HomeScreen(
-                                apiService: apiService,
+                        if (getToken != null && getToken['token'] != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Successfully logged in'),
+                              backgroundColor:
+                                  Color.fromARGB(255, 215, 224, 215),
+                            ),
+                          );
+                          Future.delayed(
+                            const Duration(seconds: 0),
+                            () => Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => HomeScreen(
+                                  userToken: getToken['token'],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                        // } else {
-                        //   ScaffoldMessenger.of(context).showSnackBar(
-                        //     const SnackBar(
-                        //       content: Text('Incorrect username or password'),
-                        //       backgroundColor: Colors.red,
-                        //     ),
-                        //   );
-                        // }
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Incorrect username or password'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
                       },
                       child: const Text(
                         'Login',
