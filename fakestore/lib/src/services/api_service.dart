@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fakestore/src/model/login.dart';
 import 'package:fakestore/src/model/products.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,10 +12,9 @@ class ApiService {
   static const headers = {'Content-Type': 'application/json'};
 
   Future<dynamic> login(String name, String password) {
+    final login = Login(username: name, password: password);
     return http
-        .post(Uri.parse("$baseUrl/auth/login"),
-            headers: headers,
-            body: json.encode({"username": name, "password": password}))
+        .post(Uri.parse("$baseUrl/auth/login"), body: login.toJson())
         .then((data) {
       final jsonData = json.decode(data.body);
 

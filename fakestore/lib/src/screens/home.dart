@@ -30,7 +30,10 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.view_list),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const AllCategoryScreen()),
+              MaterialPageRoute(
+                  builder: (_) => AllCategoryScreen(
+                        userToken: userToken,
+                      )),
             ),
           ),
           IconButton(
