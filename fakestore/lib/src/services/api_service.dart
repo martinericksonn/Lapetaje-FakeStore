@@ -13,17 +13,9 @@ class ApiService {
             headers: headers,
             body: json.encode({"username": name, "password": password}))
         .then((data) {
-<<<<<<< HEAD
-      ;
       final jsonData = json.decode(data.body);
-      print(jsonData);
 
       return jsonData;
-=======
-      print(data.body);
-      print(data.body[0]);
-      return data.body;
->>>>>>> dev
     }).catchError((error) => print(error));
   }
 

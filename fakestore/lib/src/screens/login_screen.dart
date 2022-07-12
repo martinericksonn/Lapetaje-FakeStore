@@ -73,33 +73,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           loading = false;
                         });
-                        if (getToken != null && getToken['token'] != null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Successfully logged in'),
-                              backgroundColor:
-                                  Color.fromARGB(255, 215, 224, 215),
-                            ),
-                          );
-                          Future.delayed(
-                            const Duration(seconds: 2),
-                            () => Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => HomeScreen(
-                                  apiService: apiService,
-                                ),
+                        // if (getToken != null && getToken['token'] != null) {
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     const SnackBar(
+                        //       content: Text('Successfully logged in'),
+                        //       backgroundColor:
+                        //           Color.fromARGB(255, 215, 224, 215),
+                        //     ),
+                        //   );
+                        Future.delayed(
+                          const Duration(seconds: 0),
+                          () => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => HomeScreen(
+                                apiService: apiService,
                               ),
                             ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Incorrect username or password'),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
+                          ),
+                        );
+                        // } else {
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     const SnackBar(
+                        //       content: Text('Incorrect username or password'),
+                        //       backgroundColor: Colors.red,
+                        //     ),
+                        //   );
+                        // }
                       },
                       child: const Text(
                         'Login',
