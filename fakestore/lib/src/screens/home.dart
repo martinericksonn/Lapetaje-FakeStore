@@ -46,20 +46,20 @@ class HomeScreen extends StatelessWidget {
                 return const CircularProgressIndicator();
               }
               final products = snapshot.data!;
-              print(products[0].title);
+
               return ListView.separated(
                 separatorBuilder: (_, __) => const Divider(thickness: 1),
                 itemCount: products.length,
                 itemBuilder: ((context, index) {
                   final product = snapshot.data![index];
                   return ListTile(
-                    title: Text('[title]'),
+                    title: Text(product.title),
                     leading: Image.network(
-                      '[image]',
+                      product.image!,
                       height: 50,
                       width: 50,
                     ),
-                    subtitle: Text('\$price}'),
+                    subtitle: Text(product.price.toString()),
                     onTap: () {
                       // Navigator.push(
                       //   context,
