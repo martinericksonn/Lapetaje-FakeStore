@@ -9,7 +9,11 @@ import '../services/api_service.dart';
 
 class HomeScreen extends StatelessWidget {
   final ApiService apiService;
-  const HomeScreen({Key? key, required this.apiService}) : super(key: key);
+  final String userToken;
+
+  const HomeScreen(
+      {Key? key, required this.apiService, required this.userToken})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

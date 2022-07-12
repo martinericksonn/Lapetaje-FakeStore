@@ -65,10 +65,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           loading = true;
                         });
-                        final getToken = await apiService.login(
-                          nameCtrl.text,
-                          passwordCtrl.text,
-                        );
+                        // final getToken = await apiService.login(
+                        //   nameCtrl.text,
+                        //   passwordCtrl.text,
+                        // );
 
                         setState(() {
                           loading = false;
@@ -88,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             MaterialPageRoute(
                               builder: (_) => HomeScreen(
                                 apiService: apiService,
+                                userToken: "123",
                               ),
                             ),
                           ),
