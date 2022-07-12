@@ -4,9 +4,15 @@ import '../model/products.dart';
 import '../services/api_service.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  int id;
+  String userId;
+  int productId;
   ApiService apiService;
-  ProductDetailScreen({Key? key, required this.apiService, required this.id})
+
+  ProductDetailScreen(
+      {Key? key,
+      required this.productId,
+      required this.apiService,
+      required this.userId})
       : super(key: key);
 
   @override
@@ -18,7 +24,7 @@ class ProductDetailScreen extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.all(20),
         child: FutureBuilder(
-          future: apiService.getProduct(id),
+          future: apiService.getProduct(productId),
           builder: (BuildContext context, AsyncSnapshot<Product?> snapshot) {
             if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator());

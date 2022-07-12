@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // import '../models/product.dart';
 import '../model/products.dart';
 import '../services/api_service.dart';
+import 'cart_screen.dart';
 // import 'all_category.dart';
 // import 'cart_screen.dart';
 // import 'product_detail.dart';
@@ -36,7 +37,7 @@ class HomeScreen extends StatelessWidget {
           //   onPressed: () => Navigator.push(
           //     context,
           //     MaterialPageRoute(
-          //       builder: (_) => const CartScreen(),
+          //       builder: (_) =>  CartScreen(apiService: apiService,),
           //     ),
           //   ),
           // ),

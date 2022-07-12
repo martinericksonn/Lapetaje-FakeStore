@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:fakestore/src/model/products.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/cart.dart';
+
 class ApiService {
   static const String baseUrl = 'https://fakestoreapi.com';
   static const headers = {'Content-Type': 'application/json'};
@@ -64,4 +66,43 @@ class ApiService {
       return Product.fromJson(jsonData);
     }).catchError((error) => print(error));
   }
+
+  // Future<Product> deleteCart(String productId) {
+  //   return http
+  //       .put(Uri.parse("$baseUrl/carts"),
+  //           headers: headers,
+  //           body: json.encode({
+  //             "userId": userId,
+  //             "date": DateTime.now(),
+  //             "products": [
+  //               {"productId": productId, "quantity": 1}
+  //             ]
+  //           }))
+  //       .then((data) {
+  //     final jsonData = json.decode(data.body);
+
+  //     return Product.fromJson(jsonData);
+  //   }).catchError((error) => print(error));
+  // }
+
+  // Future<Cart> getCart(
+  //   String cartId,
+  // ) {
+  //   return Cart();
+  //   // return http
+  //   //     .put(Uri.parse("$baseUrl/carts"),
+  //   //         headers: headers,
+  //   //         body: json.encode({
+  //   //           "userId": cartId,
+  //   //           "date": DateTime.now(),
+  //   //           "products": [
+  //   //             {"productId": cartId, "quantity": 1}
+  //   //           ]
+  //   //         }))
+  //   //     .then((data) {
+  //   //   final jsonData = json.decode(data.body);
+
+  //   //   return Product.fromJson(jsonData);
+  //   // }).catchError((error) => print(error));
+  // }
 }
