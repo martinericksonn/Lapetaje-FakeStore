@@ -1,3 +1,4 @@
+import 'package:fakestore/src/screens/product_detail.dart';
 import 'package:flutter/material.dart';
 
 // import '../models/product.dart';
@@ -32,15 +33,15 @@ class HomeScreen extends StatelessWidget {
           //     MaterialPageRoute(builder: (_) => const AllCategoryScreen()),
           //   ),
           // ),
-          // IconButton(
-          //   icon: const Icon(Icons.shopping_cart),
-          //   onPressed: () => Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (_) =>  CartScreen(apiService: apiService,),
-          //     ),
-          //   ),
-          // ),
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const CartScreen(),
+              ),
+            ),
+          ),
         ],
       ),
       body: Center(
@@ -66,12 +67,15 @@ class HomeScreen extends StatelessWidget {
                     ),
                     subtitle: Text(product.price.toString()),
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (_) => ProductDetailScreen(),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ProductDetailScreen(
+                            productId: product.id,
+                            userId: userToken,
+                          ),
+                        ),
+                      );
                     },
                   );
                 }),

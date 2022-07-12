@@ -6,9 +6,11 @@ import 'package:get_it/get_it.dart';
 import '../services/api_service.dart';
 
 class CartScreen extends StatelessWidget {
-ApiService get apiService => GetIt.I<ApiService>();
-  
-   const CartScreen({Key? key,}) : super(key: key);
+  ApiService get apiService => GetIt.I<ApiService>();
+
+  const CartScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ ApiService get apiService => GetIt.I<ApiService>();
             itemBuilder: (_, index) {
               final product = products[index];
               return FutureBuilder(
-                future: apiService.getProduct(product.productId),
+                future: apiService.getProduct(product['productId']),
                 builder: (BuildContext context,
                     AsyncSnapshot<Product?> productSnapshot) {
                   if (!productSnapshot.hasData) {
@@ -53,11 +55,11 @@ ApiService get apiService => GetIt.I<ApiService>();
                   return ListTile(
                     title: Text(p.title),
                     leading: Image.network(
-                      '[image]',
+                      p.image ?? '',
                       height: 40,
                     ),
                     subtitle: Text(
-                      'Quantity: '[$quantity]',
+                      product['quantity'].toString(),
                     ),
                     trailing: IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
@@ -95,4 +97,3 @@ ApiService get apiService => GetIt.I<ApiService>();
     );
   }
 }
-                    

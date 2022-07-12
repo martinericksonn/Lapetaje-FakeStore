@@ -106,12 +106,15 @@ class ApiService {
   }
 
   Future<Cart?> getCart(String id) {
-    return http.get(Uri.parse('$baseUrl/carts/$id')).then((data) {
+    return http
+        .get(Uri.parse('$baseUrl/carts/$id'), headers: headers)
+        .then((data) {
       if (data.statusCode == 200) {
+        print(data.statusCode);
         final jsonData = json.decode(data.body);
         return Cart.fromJson(jsonData);
       }
       return null;
-    }).catchError((error) => print(error));
+    }).catchError((err) => print(err));
   }
 }

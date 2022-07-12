@@ -7,7 +7,7 @@ class Cart {
   int id;
   int userId;
   DateTime date;
-  Map<int, dynamic> products;
+  List<dynamic> products;
 
   Cart({
     required this.id,
