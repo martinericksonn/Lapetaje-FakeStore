@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../services/api_service.dart';
+import 'home.dart';
 // import 'home.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -80,16 +81,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Color.fromARGB(255, 215, 224, 215),
                             ),
                           );
-                          // Future.delayed(
-                          //   const Duration(seconds: 2),
-                          //   () =>
-                          //   Navigator.pushReplacement(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (_) => const HomeScreen(),
-                          //     ),
-                          //   ),
-                          // );
+                          Future.delayed(
+                            const Duration(seconds: 2),
+                            () => Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => HomeScreen(
+                                  apiService: apiService,
+                                ),
+                              ),
+                            ),
+                          );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
