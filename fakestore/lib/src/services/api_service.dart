@@ -83,9 +83,10 @@ class ApiService {
   Future<void> updateCart(int cartId, String userId, int productId) {
     return http
         .put(Uri.parse('$baseUrl/carts/$cartId'),
+            headers: headers,
             body: jsonEncode(<String, dynamic>{
-              "userId": '1',
-              "date": DateTime.now().toString(),
+              "userId": cartId,
+              "date": DateTime.now().toIso8601String(),
               "products": [
                 {"productId": productId, "quantity": 1}
               ]
